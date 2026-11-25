@@ -22,7 +22,7 @@ from .models import (
     Testimonial,
     validate_image_file,
 )
-from .technologies import present_stack, remember_technology
+from .technologies import canonical_name, catalog_logo, present_stack, remember_technology
 
 
 def absolute_file_url(request, file_field, fallback=""):
@@ -603,6 +603,7 @@ class PublicProjectSerializer(serializers.ModelSerializer):
             "title",
             "subtitle",
             "category",
+            "project_type",
             "features",
             "stack",
             "image",
@@ -1131,6 +1132,52 @@ def _clean_named_items(items, title_key, extra_keys):
     return cleaned
 
 
+EXPERTISE_STACK_LIMIT = 24
+
+
+def _clean_expertise_stack(items, remember=False):
+    """Expertise tools stored as [{name, logo, role}]; logos come from the catalog."""
+    cleaned = []
+    seen = set()
+    if not isinstance(items, list):
+        return cleaned
+    for item in items:
+        if isinstance(item, dict):
+            raw_name = item.get("name") or ""
+            logo = str(item.get("logo") or "").strip()
+            role = str(item.get("role") or "").strip()[:60]
+        else:
+            raw_name, logo, role = item, "", ""
+        name = canonical_name(raw_name)[:80]
+        if not name or name.casefold() in seen:
+            continue
+        if remember:
+            tech = remember_technology(name, logo)
+            if tech is None:
+                continue
+            name, logo = tech.name, logo or tech.logo
+        else:
+            logo = logo or catalog_logo(name)
+        cleaned.append({"name": name, "logo": logo, "role": role})
+        seen.add(name.casefold())
+        if len(cleaned) >= EXPERTISE_STACK_LIMIT:
+            break
+    return cleaned
+
+
+def _clean_expertise_items(items, remember=False):
+    cleaned = _clean_named_items(items, "title", ["description", "icon"])
+    by_title = {
+        str(item.get("title") or "").strip(): item
+        for item in items
+        if isinstance(item, dict)
+    }
+    for row in cleaned:
+        source = by_title.get(row["title"], {})
+        row["stack"] = _clean_expertise_stack(source.get("stack") or [], remember=remember)
+    return cleaned
+
+
 def _clean_method_steps(items):
     cleaned = []
     if not isinstance(items, list):
@@ -1261,7 +1308,7 @@ class HomepageSerializer(MediaAttachMixin, serializers.ModelSerializer):
         return _clean_method_steps(value or [])
 
     def validate_expertise_items(self, value):
-        return _clean_named_items(value or [], "title", ["description", "icon"])
+        return _clean_expertise_items(value or [], remember=True)
 
     def validate_contact_email(self, value):
         return (value or "").strip()
@@ -1398,7 +1445,5 @@ class PublicHomepageSerializer(serializers.ModelSerializer):
             "title": obj.expertise_title,
             "highlight": obj.expertise_highlight,
             "subtitle": obj.expertise_subtitle,
-            "items": _clean_named_items(
-                obj.expertise_items or [], "title", ["description", "icon"]
-            ),
+            "items": _clean_expertise_items(obj.expertise_items or []),
         }

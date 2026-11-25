@@ -202,14 +202,18 @@ PROJECTS = [
     },
     {
         "name": "RUET Reporters Unity",
-        "description": "University News Portal",
+        "description": (
+            "A digital news platform connecting the RUET community through "
+            "timely reporting, student-led journalism and campus announcements."
+        ),
         "category": Project.CATEGORY_CLIENT,
+        "project_type": "News Portal",
         "url": "https://www.rru24.com",
         "features": [
-            "Latest University News",
-            "Event Updates",
-            "Student Contributions",
-            "Campus Announcements",
+            "News Publishing",
+            "Campus Journalism",
+            "Event Coverage",
+            "Student Engagement",
         ],
         "image_fallback": "/images/mockups/ruet-logo.png",
         "logo_fallback": "/logo-small.jpeg",
@@ -219,10 +223,20 @@ PROJECTS = [
     },
     {
         "name": "July Heroes",
-        "description": "Martyrs, Injured and Murderers of 2024 July Revolution",
+        "description": (
+            "A digital archive documenting the July 2024 uprising — preserving "
+            "historical records and honouring the stories and sacrifices of "
+            "those who shaped it."
+        ),
         "category": Project.CATEGORY_CLIENT,
+        "project_type": "Digital Archive",
         "url": "https://www.julyheroes.com",
-        "features": ["Martyrs", "Murderers", "Injured", "Events"],
+        "features": [
+            "Digital Archiving",
+            "Historical Documentation",
+            "Event Timeline",
+            "Public Awareness",
+        ],
         "image_fallback": "/images/mockups/july.png",
         "logo_fallback": "/logo-small.jpeg",
         "related_name": "July Heroes",
@@ -670,7 +684,7 @@ DEPARTMENTS = [
     {
         "name": "Planning",
         "description": "Innovating the future through research and technology.",
-        "icon_fallback": "/images/research.png",
+        "icon_fallback": "/images/departments/planning.svg",
         "director_name": "Musanna Galib",
         "director_image_fallback": "/images/galib.jpeg",
         "roles": ["Product Innovation", "AI Research", "Tech Optimization"],
@@ -679,7 +693,7 @@ DEPARTMENTS = [
     {
         "name": "Finance",
         "description": "Ensuring financial stability and strategic growth.",
-        "icon_fallback": "/images/finance.png",
+        "icon_fallback": "/images/departments/finance.svg",
         "director_name": "Saiful Islam",
         "director_image_fallback": "/images/saif.jpeg",
         "roles": ["Budgeting", "Auditing", "Risk Management"],
@@ -688,7 +702,7 @@ DEPARTMENTS = [
     {
         "name": "Operation",
         "description": "Strategizing for a brighter, more efficient future.",
-        "icon_fallback": "/images/planning.jpg",
+        "icon_fallback": "/images/departments/operation.svg",
         "director_name": "Hasibul Hasan Sifat",
         "director_image_fallback": "/images/sifat.jpeg",
         "roles": ["Long-term Strategy", "Resource Allocation", "Policy Development"],
@@ -697,7 +711,7 @@ DEPARTMENTS = [
     {
         "name": "Cyber",
         "description": "Securing digital landscapes for today and tomorrow.",
-        "icon_fallback": "/images/cyber.png",
+        "icon_fallback": "/images/departments/cyber.svg",
         "director_name": "Muktadir Hasan Sayem",
         "director_image_fallback": "/images/sayem.jpeg",
         "roles": ["Threat Monitoring", "Data Security", "Incident Response"],
@@ -706,7 +720,7 @@ DEPARTMENTS = [
     {
         "name": "Marketing",
         "description": "Amplifying your brand's voice in the digital world.",
-        "icon_fallback": "/images/marketing.png",
+        "icon_fallback": "/images/departments/marketing.gif?v=2",
         "director_name": "Shahadat Hossain",
         "director_image_fallback": "/images/shahadat.jpeg",
         "roles": ["Brand Strategy", "Campaign Management", "Customer Engagement"],
@@ -715,7 +729,7 @@ DEPARTMENTS = [
     {
         "name": "Information Technology",
         "description": "Harnessing the power of technology to drive business.",
-        "icon_fallback": "/images/it.png",
+        "icon_fallback": "/images/departments/information-technology.svg",
         "director_name": "Rahik Ibne Forman",
         "director_image_fallback": "/images/rahik.jpeg",
         "roles": ["Infrastructure", "Cloud Solutions", "IT Support"],
@@ -724,7 +738,7 @@ DEPARTMENTS = [
     {
         "name": "Product",
         "description": "Turning ideas into market-ready products.",
-        "icon_fallback": "/images/graphics.png",
+        "icon_fallback": "/images/departments/product.svg",
         "director_name": "Sayed Muhit Al Rafi",
         "director_image_fallback": "/images/sayed.jpg",
         "roles": ["Product Design", "Prototyping", "User Research"],
@@ -752,6 +766,10 @@ CLIENTS = [
     {"name": "CloudX Academy", "url": "https://www.cloudx.academy", "logo_fallback": "/images/cloudx.png"},
     {"name": "July Heroes", "url": "https://www.julyheroes.com", "logo_fallback": "/images/july.svg"},
 ]
+
+def _tool(name, role, icon):
+    return {"name": name, "role": role, "logo": f"/tech/{icon}.svg"}
+
 
 HOMEPAGE = {
     "stats": [
@@ -939,6 +957,25 @@ HOMEPAGE = {
                 "and Android."
             ),
             "icon": "/images/mobile-development.png",
+            "stack": [
+                _tool("Flutter", "Cross-platform", "flutter"),
+                _tool("React Native", "Cross-platform", "react"),
+                _tool("Expo", "Mobile tooling", "expo"),
+                _tool("Jetpack Compose", "Android UI", "jetpackcompose"),
+                _tool("SwiftUI", "iOS UI", "swift"),
+                _tool("Xcode", "iOS builds", "xcode"),
+                _tool("Android Studio", "Android builds", "androidstudio"),
+                _tool("Firebase", "Mobile backend", "firebase"),
+                _tool("Supabase", "Realtime backend", "supabase"),
+                _tool("GraphQL", "API layer", "graphql"),
+                _tool("Apollo", "Data client", "apollographql"),
+                _tool("Stripe", "In-app payments", "stripe"),
+                _tool("Sentry", "Crash reporting", "sentry"),
+                _tool("Fastlane", "Release automation", "fastlane"),
+                _tool("Codemagic", "Mobile CI/CD", "codemagic"),
+                _tool("Google Play", "Distribution", "googleplay"),
+                _tool("App Store", "Distribution", "appstore"),
+            ],
         },
         {
             "title": "UI/UX Design",
@@ -948,6 +985,24 @@ HOMEPAGE = {
                 "loyal customers."
             ),
             "icon": "/images/ui-ux.svg",
+            "stack": [
+                _tool("Figma", "Interface design", "figma"),
+                _tool("Framer", "Interactive prototypes", "framer"),
+                _tool("Sketch", "Visual design", "sketch"),
+                _tool("Miro", "Workshops & flows", "miro"),
+                _tool("Storybook", "Component library", "storybook"),
+                _tool("Tailwind CSS", "Design tokens", "tailwindcss"),
+                _tool("shadcn/ui", "UI primitives", "shadcnui"),
+                _tool("Radix UI", "Accessible components", "radixui"),
+                _tool("Material UI", "Component system", "mui"),
+                _tool("Chakra UI", "Component system", "chakraui"),
+                _tool("GSAP", "Motion design", "greensock"),
+                _tool("Rive", "Interactive animation", "rive"),
+                _tool("Three.js", "3D experiences", "threedotjs"),
+                _tool("Blender", "3D assets", "blender"),
+                _tool("Webflow", "Visual development", "webflow"),
+                _tool("Hotjar", "Usability insights", "hotjar"),
+            ],
         },
         {
             "title": "Web Development",
@@ -956,6 +1011,26 @@ HOMEPAGE = {
                 "modern frameworks — engineered for performance and growth."
             ),
             "icon": "/images/web-development.svg",
+            "stack": [
+                _tool("Next.js", "React framework", "nextdotjs"),
+                _tool("React", "Interfaces", "react"),
+                _tool("Nuxt", "Vue framework", "nuxtdotjs"),
+                _tool("Django", "Backend framework", "django"),
+                _tool("Node.js", "Runtime", "nodedotjs"),
+                _tool("NestJS", "API framework", "nestjs"),
+                _tool("GraphQL", "API layer", "graphql"),
+                _tool("PostgreSQL", "Relational data", "postgresql"),
+                _tool("Redis", "Caching", "redis"),
+                _tool("Elasticsearch", "Search", "elasticsearch"),
+                _tool("Apache Kafka", "Event streaming", "apachekafka"),
+                _tool("RabbitMQ", "Message queues", "rabbitmq"),
+                _tool("Prisma", "ORM", "prisma"),
+                _tool("Docker", "Containers", "docker"),
+                _tool("Kubernetes", "Orchestration", "kubernetes"),
+                _tool("Cloudflare", "Edge network", "cloudflare"),
+                _tool("Vercel", "Deployment", "vercel"),
+                _tool("AWS", "Cloud", "amazonwebservices"),
+            ],
         },
         {
             "title": "Cyber Security",
@@ -965,6 +1040,26 @@ HOMEPAGE = {
                 "the clock."
             ),
             "icon": "/images/cyber-security.svg",
+            "stack": [
+                _tool("Kali Linux", "Penetration testing", "kalilinux"),
+                _tool("Burp Suite", "Web app testing", "burpsuite"),
+                _tool("Metasploit", "Exploit validation", "metasploit"),
+                _tool("Wireshark", "Traffic analysis", "wireshark"),
+                _tool("OWASP", "Security standards", "owasp"),
+                _tool("Snyk", "Dependency scanning", "snyk"),
+                _tool("SonarQube", "Code analysis", "sonarqube"),
+                _tool("Dependabot", "Patch automation", "dependabot"),
+                _tool("HashiCorp Vault", "Secrets management", "vault"),
+                _tool("Okta", "Identity", "okta"),
+                _tool("Auth0", "Authentication", "auth0"),
+                _tool("Keycloak", "Access management", "keycloak"),
+                _tool("Splunk", "SIEM", "splunk"),
+                _tool("Elastic Security", "Threat detection", "elastic"),
+                _tool("Cloudflare", "WAF & DDoS", "cloudflare"),
+                _tool("WireGuard", "Secure networking", "wireguard"),
+                _tool("Terraform", "Hardened infrastructure", "terraform"),
+                _tool("Prometheus", "Monitoring", "prometheus"),
+            ],
         },
         {
             "title": "Digital Marketing",
@@ -973,6 +1068,24 @@ HOMEPAGE = {
                 "your brand, generate qualified leads, and accelerate revenue."
             ),
             "icon": "/images/digital-marketing.svg",
+            "stack": [
+                _tool("Google Ads", "Search & display", "googleads"),
+                _tool("Meta Ads", "Social campaigns", "meta"),
+                _tool("LinkedIn Ads", "B2B campaigns", "linkedin"),
+                _tool("TikTok Ads", "Short-form video", "tiktok"),
+                _tool("Google Analytics", "Web analytics", "googleanalytics"),
+                _tool("Google Tag Manager", "Tracking", "googletagmanager"),
+                _tool("Google Search Console", "Search health", "googlesearchconsole"),
+                _tool("Looker Studio", "Reporting", "looker"),
+                _tool("Google BigQuery", "Data warehouse", "googlebigquery"),
+                _tool("Mixpanel", "Product analytics", "mixpanel"),
+                _tool("Hotjar", "Behavior insights", "hotjar"),
+                _tool("Semrush", "SEO research", "semrush"),
+                _tool("HubSpot", "Marketing automation", "hubspot"),
+                _tool("Salesforce", "CRM", "salesforce"),
+                _tool("Mailchimp", "Email marketing", "mailchimp"),
+                _tool("Zapier", "Workflow automation", "zapier"),
+            ],
         },
         {
             "title": "AI Powered Solutions",
@@ -981,9 +1094,50 @@ HOMEPAGE = {
                 "drive smarter decisions and unlock new opportunities for growth."
             ),
             "icon": "/images/ai.png",
+            "stack": [
+                _tool("OpenAI", "LLM platform", "openai"),
+                _tool("Anthropic", "LLM platform", "anthropic"),
+                _tool("Google Gemini", "Multimodal AI", "googlegemini"),
+                _tool("Hugging Face", "Model hub", "huggingface"),
+                _tool("LangChain", "LLM orchestration", "langchain"),
+                _tool("PyTorch", "Deep learning", "pytorch"),
+                _tool("TensorFlow", "Model training", "tensorflow"),
+                _tool("scikit-learn", "Machine learning", "scikitlearn"),
+                _tool("Keras", "Neural networks", "keras"),
+                _tool("OpenCV", "Computer vision", "opencv"),
+                _tool("ONNX", "Model portability", "onnx"),
+                _tool("MLflow", "MLOps", "mlflow"),
+                _tool("Weights & Biases", "Experiment tracking", "weightsandbiases"),
+                _tool("Apache Airflow", "Data pipelines", "apacheairflow"),
+                _tool("Apache Spark", "Big data", "apachespark"),
+                _tool("NVIDIA CUDA", "GPU compute", "nvidia"),
+            ],
         },
     ],
 }
+
+
+def _backfill_expertise_stacks(homepage):
+    """Give existing expertise cards the seeded tool stack when theirs is missing or smaller."""
+    seeded = {
+        item["title"].casefold(): item.get("stack", [])
+        for item in HOMEPAGE["expertise_items"]
+    }
+    items = homepage.expertise_items if isinstance(homepage.expertise_items, list) else []
+    changed = False
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        stack = seeded.get(str(item.get("title") or "").strip().casefold())
+        current = item.get("stack") if isinstance(item.get("stack"), list) else []
+        # Upgrade empty or older, shorter seeded stacks; keep anything as large or larger.
+        if stack and len(current) < len(stack):
+            item["stack"] = [dict(tool) for tool in stack]
+            changed = True
+    if changed:
+        homepage.expertise_items = items
+        homepage.save(update_fields=["expertise_items"])
+    return changed
 
 
 def _is_empty(value):
@@ -1085,6 +1239,8 @@ class Command(BaseCommand):
             for key, value in HOMEPAGE.items():
                 setattr(homepage, key, value)
             homepage.save()
+            updated_total += 1
+        elif _backfill_expertise_stacks(homepage):
             updated_total += 1
 
         self.stdout.write(
